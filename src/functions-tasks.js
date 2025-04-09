@@ -112,7 +112,7 @@ function getPolynom(...array) {
  */
 function memoize(func) {
   let cash;
-  return function () {
+  return function funcNames() {
     if (cash === undefined) {
       cash = func();
     }
@@ -136,7 +136,7 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-  return function () {
+  return function fn() {
     let att = attempts;
     while (att > 0) {
       try {
@@ -173,7 +173,7 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-  return function (...arg) {
+  return function fn(...arg) {
     const params = arg.map(JSON.stringify).join(',');
     logFunc(`${func.name}(${params}) starts`);
     const result = func(...arg);
@@ -218,7 +218,7 @@ function partialUsingArguments(fn, ...initialArgs) {
  */
 function getIdGeneratorFunction(startFrom) {
   let id = startFrom - 1;
-  return function () {
+  return function fn() {
     id += 1;
     return id;
   };
